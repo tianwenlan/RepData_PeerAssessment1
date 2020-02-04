@@ -27,3 +27,8 @@ median_steps_per_day <- median(steps_per_day)
 steps_per_interval <- tapply(data$steps, data$interval, FUN=mean, na.rm=TRUE)
 plot(steps_per_interval, type='l', xlab='5 min interval')
 
+#Which 5-minute interval, on average across all the days in the dataset, 
+#contains the maximum number of steps?
+max_interval <- which.max(steps_per_interval)
+
+#Imputing missing values
