@@ -45,3 +45,15 @@ for(i in as.numeric(names(table(data$interval)))){
     new_data[new_data$interval==i,]$steps <- steps_per_interval[steps_per_interval$interval==i,]$steps
 }
 
+#Make a histogram of the total number of steps taken each day and Calculate 
+#and report the mean and median total number of steps taken per day. 
+#Do these values differ from the estimates from the first part of the assignment?
+#What is the impact of imputing missing data on the estimates of the total daily 
+#number of steps?
+
+steps_per_day_new <- tapply(data$steps, data$date, FUN=sum, na.rm=TRUE)
+barplot(steps_per_day_new)
+avg_steps_per_day_new <- mean(steps_per_day_new)
+median_steps_per_day_new <- median(steps_per_day_new)
+
+
