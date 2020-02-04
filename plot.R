@@ -13,3 +13,6 @@ if (!file.exists(dataPath)) {
 data <- read.csv(dataPath)
 
 data$date <- as.Date(as.character(data$date))
+
+#Histogram of the total number of steps taken each day
+barplot(tapply(data$steps, data$date, FUN=sum, default = 0))
