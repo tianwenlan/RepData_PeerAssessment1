@@ -22,3 +22,8 @@ barplot(steps_per_day)
 avg_steps_per_day <- mean(steps_per_day)
 median_steps_per_day <- median(steps_per_day)
 
+#What is the average daily activity pattern?
+#Time series plot of the average number of steps taken
+steps_per_interval <- tapply(data$steps, data$interval, FUN=mean, na.rm=TRUE)
+plot(steps_per_interval, type='l', xlab='5 min interval')
+
