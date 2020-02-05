@@ -1,4 +1,6 @@
 library(dplyr)
+library(lattice)
+
 #step 0: downlaod files
 
 zipFile <- "activity.zip"
@@ -56,4 +58,19 @@ barplot(steps_per_day_new)
 avg_steps_per_day_new <- mean(steps_per_day_new)
 median_steps_per_day_new <- median(steps_per_day_new)
 
+#Are there differences in activity patterns between weekdays and weekends?
+new_data$weekdays <- factor(weekdays((new_data$date)) %in% c('Saturday', 'Sunday'),
+                            levels = c(FALSE, TRUE), labels=c('weekday', 'weekend'))
 
+new_data_by_interval <- aggregate(steps ~ interval + weekdays, new_data, mean)
+
+#steps_per_interval_new <- data.frame(key=names(steps_per_interval_new), value=steps_per_interval_new)
+#plot(steps_per_interval$key, steps_per_interval$value, type='l', xlab='5 min interval')
+
+new_data_by_interval
+#xylot<- xyplot(steps ~ interval | weekdays, data =new_data_by_interval, type='l', as.table=FALSE)
+#print(xylot)
+
+plot <- xyplot(steps ~ interval | weekdays, new_data_by_interval, type = "l", layout = c(1, 2), 
+               xlab = "Interval", ylab = "Number of steps", main = 'Steps by intervals')
+print(plot)
